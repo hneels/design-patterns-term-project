@@ -95,7 +95,6 @@ public class Transcript {
         // don't divide by 0: if completedCourses is 0, there's no GPA yet
         if (completedCourses == 0) return -1;
         // return the average of all completed courses, rounded to 2 places
-        double grade = Math.round((gradeSum / completedCourses) * 100.0) / 100.0;
-        return grade;
+        return Math.round((gradeSum / completedCourses) * 100.0) / 100.0;
     }
 }

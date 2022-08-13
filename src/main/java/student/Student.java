@@ -3,13 +3,12 @@ package student;
 import course.CourseOffering;
 import course.Observer;
 import program.Program;
+import query.Person;
 import student.strategy.CertificateStrategy;
 import student.strategy.DegreeStrategy;
 import student.strategy.GraduationStrategy;
 
-public class Student implements Observer {
-
-    private final String name;
+public class Student extends Person implements Observer {
 
     // the program will be null until the student enrolls
     private Program program;
@@ -17,14 +16,13 @@ public class Student implements Observer {
     // the strategy for determining graduation eligibility is determined by the program they're enrolled in
     private GraduationStrategy graduationStrategy;
 
-
     // transcript will start empty and be updated by Observer pattern when they enroll in/ complete a course
     private final Transcript transcript;
 
 
     public Student(String name) {
+        super(name);
         System.out.println("Creating student " + name);
-        this.name = name;
         this.transcript = new Transcript(this);
     }
 
@@ -38,7 +36,7 @@ public class Student implements Observer {
     public void enrollInProgram(Program program) {
         this.program = program;
 
-        System.out.println("Enrolled student " + name + " in " + program);
+        System.out.println("Enrolled student " + getName() + " in " + program);
 
         // if undergrad or graduate student, the graduation strategy must also take into account thesis completion
         if (program.hasThesis()) {
@@ -68,7 +66,7 @@ public class Student implements Observer {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
 

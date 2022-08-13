@@ -1,9 +1,9 @@
 package faculty;
 
-import course.Concentration;
 import course.ConcentrationComponent;
+import query.Person;
 
-public abstract class FacultyMember {
+public abstract class FacultyMember extends Person {
 
     // TODO needs a list of current courses : initialized in constructor
 
@@ -11,25 +11,16 @@ public abstract class FacultyMember {
 
     // TODO need addCourse, removeCourse, and showCourses method
 
-    private String name;
 
     // subclasses will use this constructor with super() in their own constructor
     public FacultyMember(String name) {
-        this.name = name;
-    }
-
-    // setter and getter for name
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
+        super(name);
     }
 
     // the string representation is just this professor's name
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
     /* from usecase: "A full-time faculty member is responsible to coordinate each concentration (or sub-concentration)."
