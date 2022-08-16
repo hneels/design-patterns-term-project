@@ -1,9 +1,11 @@
 package student.strategy;
 
-import program.Program;
+/* Strategy pattern:
+an algorithm to determine whether a student has completed program requirements and can graduate.
+ This interface is implemented by CertificateStrategy and DegreeStrategy. */
+
 import student.Student;
 
-/* an algorithm to determine whether a student has completed program requirements and can graduate */
 public interface GraduationStrategy {
     public boolean eligibleToGraduate(Student student);
 }

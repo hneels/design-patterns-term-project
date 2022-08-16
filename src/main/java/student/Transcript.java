@@ -1,9 +1,15 @@
 package student;
 
+/* A Transcript is a record of all courses a Student has enrolled in and/or completed. Every Student has a Transcript
+automatically instantiated by its constructor.
+
+The Transcript aggregates CourseRecord instances, each of which encapsulates information about the course taken and grade received.
+
+ */
+
 import course.CourseOffering;
 import course.CourseRecord;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +39,7 @@ public class Transcript {
 
     // retrieve a CourseRecord from this transcript by the course's number
     public CourseRecord getRecord(int courseNum) {
-        System.out.println("Searching for course number " + courseNum + " in transcript");
+        System.out.println("Searching for course number " + courseNum + " in " + student + "'s transcript");
         return recordMap.get(courseNum);
     }
 
@@ -50,6 +56,7 @@ public class Transcript {
     public void deleteRecord(CourseOffering courseOffering) {
         int courseNum = courseOffering.getSpecification().getNumber();
         recordMap.remove(courseNum);
+        System.out.println("Removing course " + courseOffering + " from " + student + "'s transcript");
     }
 
     public void setGrade(CourseOffering courseOffering, double grade) {
@@ -63,24 +70,27 @@ public class Transcript {
         System.out.println("Set grade in " + student + "'s transcript: grade " + grade +" in course " + courseOffering);
     }
 
-    // print the transcript to console
+    // print the transcript to console, including coursework, program, and gpa
     public void print() {
-        System.out.println("\n--- Printing " + student +" 's Transcript ---");
+
+        double gpa = calculateGPA();
+
         // if no classes on record, print message
         if (recordMap.size() == 0) {
-            System.out.println("No classes yet");
+            System.out.println("*** " + student +"'s transcript for " + student.getProgram() + ". No GPA ***");
+            System.out.println("No classes finished yet");
             return;
         }
         // if student has taken classes, iterate through map
+        System.out.println("*** " + student +"'s transcript for " + student.getProgram() + " with GPA " + gpa + " ***");
         for (int courseNum : recordMap.keySet()) {
             // use toString provided by CourseRecord
             System.out.println(recordMap.get(courseNum));
         }
     }
 
-    // calculate the GPA (used by student gpa() method)
+    // calculate the GPA (used by Student gpa() method)
     public double calculateGPA() {
-        System.out.println("Calculating GPA for " + student);
 
         // only include grades for completed courses
         int completedCourses = 0;
@@ -93,8 +103,13 @@ public class Transcript {
             }
         }
         // don't divide by 0: if completedCourses is 0, there's no GPA yet
-        if (completedCourses == 0) return -1;
+        if (completedCourses == 0) {
+            System.out.println("Calculating GPA for " + student + "... no grades yet");
+            return -1;
+        }
         // return the average of all completed courses, rounded to 2 places
-        return Math.round((gradeSum / completedCourses) * 100.0) / 100.0;
+        double grade = Math.round((gradeSum / completedCourses) * 100.0) / 100.0;
+        System.out.println("Calculating GPA for " + student + ": " + grade);
+        return grade;
     }
 }

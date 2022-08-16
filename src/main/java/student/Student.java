@@ -1,5 +1,8 @@
 package student;
 
+/* Student is a subclass of Person abstract class and Observer interface. Student class is involved in
+* Facade, Strategy, Observer, and Factory patterns */
+
 import course.CourseOffering;
 import course.Observer;
 import program.Program;
@@ -19,7 +22,7 @@ public class Student extends Person implements Observer {
     // transcript will start empty and be updated by Observer pattern when they enroll in/ complete a course
     private final Transcript transcript;
 
-
+    // constructor automatically creates a new Transcript for this student
     public Student(String name) {
         super(name);
         System.out.println("Creating student " + name);
@@ -30,7 +33,6 @@ public class Student extends Person implements Observer {
     public Transcript getTranscript() {
         return transcript;
     }
-
 
     // enroll this student in a program
     public void enrollInProgram(Program program) {
@@ -51,7 +53,7 @@ public class Student extends Person implements Observer {
     /* strategy pattern: determining graduation eligibility is delegated to the Strategy algorithm, based on student's
     program type  */
     public boolean eligibleToGraduate() {
-        return this.graduationStrategy.eligibleToGraduate(this);
+        return graduationStrategy.eligibleToGraduate(this);
     }
 
     // retrieve this student's current program
@@ -68,7 +70,6 @@ public class Student extends Person implements Observer {
     public String toString() {
         return getName();
     }
-
 
     /* Observer Pattern: override from Observer interface to update student when they are moved off the waitlist for a course */
     @Override

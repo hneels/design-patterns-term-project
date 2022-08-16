@@ -1,13 +1,14 @@
 package student.strategy;
 
-import course.CourseRecord;
+/* Strategy pattern: a certificate-seeking student's eligibility is determined by coursework completion only.
+* The algorithm for determining a Certificate-program student's graduation eligibility is encapsulated in this class  */
+
 import program.Program;
 import student.Student;
 import student.Transcript;
 
 import java.util.List;
 
-/* Strategy pattern: a certificate-seeking student's eligibility is determined by coursework completion only */
 public class CertificateStrategy implements GraduationStrategy {
 
     @Override

@@ -1,13 +1,14 @@
 package student.strategy;
 
+/* Strategy pattern: the algorithm for determining a degree-seeking student's eligibility to graduate is determined by
+core coursework completion (required by their specific degree program), elective completion, and thesis completion */
+
 import program.Program;
 import student.Student;
 import student.Thesis;
 import student.ThesisDatabase;
 import student.Transcript;
-import student.strategy.GraduationStrategy;
 
-/* Strategy pattern: a degree-seeking student's eligibility is determined by both coursework and thesis */
 public class DegreeStrategy implements GraduationStrategy {
 
     @Override
@@ -25,9 +26,11 @@ public class DegreeStrategy implements GraduationStrategy {
 
         Transcript transcript = student.getTranscript();
 
-        // check if student has completed the total number of courses required for the degree
-        if (transcript.getCompletedCourseCount() < program.getTotalCourseNumber()) {
-            System.out.println(student + " has not completed enough total courses");
+        // check if student has completed the total number of courses required for the degree, including electives
+        System.out.println("Checking if enough electives are completed...");
+        int programCourses = program.getTotalCourseNumber();
+        if (transcript.getCompletedCourseCount() < programCourses) {
+            System.out.println(student + " has not completed " + programCourses +" courses");
             return false;
         }
 

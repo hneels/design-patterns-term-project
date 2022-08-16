@@ -2,15 +2,26 @@ package program;
 
 /* used this tutorial https://jvmaware.com/enum-as-factory/ as a reference */
 
-/* since the ProgramFactory is an enum, it can be used anywhere throughout the application without creating a new instance.
+/* Factory Pattern:
+since the ProgramFactory is an enum, it can be used anywhere throughout the application without creating a new instance.
 Classes outside the package, like Student, can rely on only this factory to create new objects of Program subclasses.
 Like so:
 Program CsGraduateProgram = ProgramFactory.CS_GRAD.createProgram();
  */
 
-// Factory pattern
+import program.certificate.AnalyticsCertificate;
+import program.certificate.SecurityCertificate;
+import program.certificate.WebCertificate;
+import program.graduate.CISGradDegree;
+import program.graduate.CSGradDegree;
+import program.graduate.DAGradDegree;
+import program.undergrad.CISUndergrad;
+import program.undergrad.CSUndergrad;
+
+
 public enum ProgramFactory {
 
+    // each enum value calls the appropriate constructor and returns a new instance of the desired Program subclass
     SECURITY_CERT {
         @Override
         public Program createProgram() {

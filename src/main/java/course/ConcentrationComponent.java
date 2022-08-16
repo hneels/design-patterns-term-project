@@ -1,8 +1,8 @@
 package course;
 
-/* Composite Pattern: Courses, Concentrations and Sub-Concentrations will implement this interface so that calling
-* format() on any concentration will return and show the output for all sub-concentrations AND CourseSpecifications
-* contained within it */
+/* Composite Pattern: CourseSpecifications and Concentrations (including Sub-Concentrations) will implement this interface
+so that calling format() on any concentration will return and show the output for all sub-concentrations AND
+CourseSpecifications contained within it */
 
 import java.util.List;
 

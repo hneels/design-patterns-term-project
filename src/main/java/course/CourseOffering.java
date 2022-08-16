@@ -1,5 +1,8 @@
 package course;
 
+/* this class represents a specific instance of a course (as described by a CourseSpecification) offered during any
+given semester */
+
 import faculty.Chairman;
 import student.Student;
 
@@ -8,10 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-/* this class represents a specific instance of a course (as described by a CourseSpecification) offered during any
-given semester */
 public class CourseOffering {
-
 
     // has a CourseSpecification which describes it & contains information about teacher, syllabus, etc.
     private CourseSpecification specification;
@@ -28,13 +28,17 @@ public class CourseOffering {
     private boolean finished;
 
     // constructor must take a CourseSpecification as the template for this course
-    public CourseOffering(CourseSpecification courseSpecification) {
-        this.specification = courseSpecification;
+    public CourseOffering(CourseSpecification specification) {
+        // set fields
+        this.specification = specification;
         this.finished = false;
         // initialize empty lists
         studentList = new ArrayList<>();
         waitList = new LinkedList<>(); // linked list better since we poll from front
         System.out.println("Created Course Offering: " + this);
+
+        // add this course to the professor's course list (will throw exception if their course list is at limit)
+        specification.getTeacher().addCourse(this);
     }
 
     // getters for both student Lists (used by faculty/ Chairman)
@@ -62,7 +66,7 @@ public class CourseOffering {
             // also add a new record of this course to their transcript
             student.getTranscript().putRecord(this);
         } else {
-            // from usecase: when the limit is reached, the Chairman will be notified automatically
+            // requirement: when the limit is reached, the Chairman will be notified automatically
             waitList.add(student);
             System.out.println("Student " + student + " added to waitlist for course " + this);
             // Observer pattern: notify the Chairman observer that limit is reached
@@ -103,11 +107,15 @@ public class CourseOffering {
         // give each student a grade
         for (Student student : studentList) {
             Random random = new Random();
-            // from usecase, the following points are possible for grades: A (4), B (3), C (2), D (1), F(0), rounded to 2 places
-            double randomGrade = Math.round((random.nextDouble() * 4) * 100.0) / 100.0;
+            // requirement: the following points are possible for grades: A (4), B (3), C (2), D (1), F(0) (but we won't fail anyone)
+            double randomGrade = Math.round((1 + (random.nextDouble() * 3)) * 100.0) / 100.0;
             student.getTranscript().setGrade(this, randomGrade);
+
             // hopefully my course grade will not be generated with this algorithm :)
         }
+        /* when course is finished, it must be removed from the professor's schedule (so that more courses can be added
+            without reaching their course limit */
+        specification.getTeacher().removeCourse(this);
     }
 
     @Override

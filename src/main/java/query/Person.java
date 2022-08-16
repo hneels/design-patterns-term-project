@@ -1,7 +1,12 @@
 package query;
 
 /* The Person class encapsulates the functionality for receiving messages ("queries"). Since all methods are fully defined,
-other "person" classes (FacultyMember and Student) can extend this with no further work needed to be able to receive queries.
+other "person" classes (FacultyMember and Student) can extend this with no overrides needed to be able to receive queries.
+
+Student and FacultyMember both extend this class.
+
+Chose to include it in this package because its core behavior is related to queries.
+
  */
 public abstract class Person {
 

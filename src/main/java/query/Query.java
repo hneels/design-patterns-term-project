@@ -1,9 +1,10 @@
 package query;
 
 
-/* From usecase: "Students can send a query to their advisor as well as the Chairperson and any faculty."
+/* requirement: "Students can send a query to their advisor as well as the Chairperson and any faculty."
 This class encapsulates a query to/from a Student to/from a FacultyMember
  */
+
 public class Query {
 
     private final Person sender;
@@ -36,7 +37,6 @@ public class Query {
         this.message = message;
         System.out.println("Adding message body '" + message + "' to query");
     }
-
 
     // ensure message body isn't empty before sending
     public void send() {

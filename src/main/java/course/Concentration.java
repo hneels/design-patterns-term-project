@@ -3,9 +3,6 @@ package course;
 /* a top-level Concentration. May contain only CourseSpecifications if the concentration is small, or may contain
 sub-concentrations if it's a wide one */
 
-import faculty.Chairman;
-import faculty.FacultyMember;
-import faculty.FullTimeFaculty;
 
 import java.util.ArrayList;
 import java.util.List;

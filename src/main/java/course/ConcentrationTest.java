@@ -1,6 +1,7 @@
 package course;
 
-/* class for testing the course package and related functionality */
+/* Test class for demonstrating Composite pattern and the Concentration-related functionality,
+* including all requirements from the usecase relating to Concentrations and faculty members coordinating them */
 
 import faculty.FacultyMember;
 import faculty.FullTimeFaculty;
@@ -10,7 +11,7 @@ public class ConcentrationTest {
 
     public static void main(String[] args) {
 
-        // a teacher
+        // a professor
         FacultyMember professorBob = new FullTimeFaculty("Professor Bob");
 
         // a top-level concentration
@@ -39,14 +40,12 @@ public class ConcentrationTest {
         /* demonstrate Composite Pattern with format()
         "output" contains the output for the whole tree, but output is also printed within the format() invocations
         so it doesn't need to be printed here */
-        System.out.println("\n--- Testing format() of concentrations, sub-concentrations, and courses ---");
+        System.out.println("\n--- Testing format() method of concentrations, sub-concentrations, and courses ---");
         String output = languagesConcentration.format();
-
-        System.out.println();
 
 
         // test Faculty Members coordinating the Concentrations and sub-concentrations
-        System.out.println("--- Testing faculty members coordinating different concentrations ---");
+        System.out.println("\n--- Testing faculty members coordinating different concentrations ---");
 
 
         System.out.println("\nFull-time faculty attempts to coordinate top-level concentration...");
@@ -56,7 +55,7 @@ public class ConcentrationTest {
         professorBob.coordinate(oopSubConcentration);
 
 
-        System.out.println("\nPart-time faculty attempts to coordinate top-level concentration...");
+        System.out.println("\nPart-time faculty attempts to coordinate sub-concentration...");
         FacultyMember charlieProfessor = new PartTimeFaculty("Professor Charlie");
         charlieProfessor.coordinate(oopSubConcentration);
 
