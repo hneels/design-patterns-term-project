@@ -46,10 +46,10 @@ A Java command-line program exploring factory, singleton, strategy, observer, co
 <hr>
 
 ## Introduction
-This document implements the detailed use-case given in the CS665 template project, an object-oriented Java approach to organizing and representing a university Computer Science department including its courses, faculty, and students. In addition, six design patterns are demonstrated within the project: two creational (factory and singleton), two structural (composite and façade), and two behavioral (observer and strategy).
+This document implements the detailed use-case given in the [CS665 template project](./CS665_FinalProject.pdf), an object-oriented Java approach to organizing and representing a university Computer Science department including its courses, faculty, and students. In addition, six design patterns are demonstrated within the project: two creational (factory and singleton), two structural (composite and façade), and two behavioral (observer and strategy).
 
 ## Assumptions and Modifications
-Please see [here](./CS665_FinalProject.pdf) for the usecase.
+Please review the [assignment specification](./CS665_FinalProject.pdf) for a thorough description of the usecase.
 
 For the most part, the template assignment has been implemented as-is. However, there are a few modifications. Instead of implementing a system where students may only take certain courses during certain semesters (e.g. only electives in the last year, degrees must be completed in a certain number of years) I designed the programs to mimic the way the BU MET Software Development degree actually works: courses can be taken continuously throughout the year and are not constrained by a semester system. Students may take either electives or core courses first, and take as much time to complete the degree as they wish. Eligibility for graduation is determined by whether all core classes for the program, as well as a sufficient number of electives, have been completed. (This algorithm is encapsulated in the GraduationStrategy subclasses, described below.) With this modification there is no need for “year” and “semester” domain classes. A student’s transcript will instead show a record of all courses taken, the final grade for each, and an additional check will be done to ensure a thesis was completed before graduation is permitted. The degrees and certificates are otherwise implemented as suggested in the given use-case, and a thesis is still required of all degree-seeking students.
 
@@ -79,6 +79,7 @@ This class diagram represents a domain-level survey of the objects and behaviors
 To reduce dependency on the many Program subclasses, I created one Factory class (program.ProgramFactory) which uses the constructors of the many Program subclasses and returns the appropriate subtype to the methods that use it, such as Student’s enrollInProgram() method. This reduces coupling between the packages and allows a Student object to maintain a reference to its Program without needing to keep track of the specific subclass, since the Program interface contains all needed behavior. Comparing this diagram to the diagram without patterns visually demonstrates the reduced dependencies. I also made the factory class an enum, where each enum literal implements the createProgram() method to return a Program (which is actually an instance of a degree or certificate program subclass). Thus, from the "students" package, a student can enroll in a program using an expression such as the following:
 
 Program p = ProgramFactory.SECURITY_CERT.createProgram();
+
 myStudent.enrollInProgram(p);
 
 Using an enum class makes the factory less error-prone as compared to a String parameter, and it also eliminates the need to instantiate new factories each time a program is needed. This design pattern implementation accomplishes many of the same goals as Facade pattern, but this is a Factory because new instances are returned.
@@ -88,11 +89,13 @@ To demonstrate the use of this pattern, the student.StudentTest class enrolls St
 Student alice = new Student("Alice");
 
 // use Factory to create Alice's certificate program
+
 alice.enrollInProgram(ProgramFactory.WEB_CERT.createProgram());
 
 Student bob = new Student("Bob");
 
 // use Factory to create Bob's degree program
+
 bob.enrollInProgram(ProgramFactory.CS_GRAD.createProgram());
 
 The relevant output for this test class is shown below.
