@@ -31,7 +31,7 @@ A Java command-line program exploring factory, singleton, strategy, observer, co
     * [Output: StudentTest.java](#output--studenttestjava-1)
 - [Behavioral Pattern 2: Observer](#behavioral-pattern-2--observer)
     * [Diagram](#diagram-3)
-- [Explanation](#explanation-4)
+    * [Explanation](#explanation-4)
     * [Output: EnrollmentTest.java](#output--enrollmenttestjava)
 - [Structural Pattern 1: Composite](#structural-pattern-1--composite)
     * [Diagram](#diagram-4)
