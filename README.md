@@ -6,7 +6,7 @@ A Java command-line program exploring factory, singleton, strategy, observer, co
 
 
 
-**Please note: this is my final project for CS665: Software Design Patterns. Copying any portion of it and attributing it as your own work is a violation of Boston University's Academic Conduct code.**
+**Please note: this is my final project for CS665: Software Design Patterns. Copying any portion of it and representing it as your own work is a violation of Boston University's Academic Conduct code.**
 
 <hr>
 
