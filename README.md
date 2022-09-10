@@ -165,7 +165,7 @@ Note: some portions of repetitive output have been truncated in this report beca
 
 <img src="images/diagrams/observer-diagram.png">
 
-## Explanation
+### Explanation
 
 In the Observer pattern, a single source object aggregates a set of others, calling a method to notify members when the source's state changes. The course enrollment waitlist functionality, in which certain students and the Chairman need to be notified about changes to the enrollment list and waitlist for a course, is a perfect application for this pattern. The CourseOffering class (an instance of a given course taught during a semester) is the source (or subject), and the Chairman and Student classes are observers. To allow both classes to have a unified method that's triggered appropriately, both Chairman and Student implement the Observer interface, which defines one method, updateAboutCourse(CourseOffering).
 
